@@ -1,0 +1,53 @@
+<html>
+<head></head>
+<body>
+<canvas width="1900" height="915" id="can"></canvas>
+<script>
+  var c = can.getContext("2d");
+
+
+var w = c.canvas.width;
+var h = c.canvas.height;
+var skok = 2;
+var czas;
+
+var x = 150;
+var y = 202;
+var vx = 5;
+var vy = 5;
+var kat = 1;
+var vk = 1;
+var bok = 100;
+
+function kwaO(xs,ys,bok,kat,kolor){
+  c.save();
+  c.translate(xs-bok/2,ys-bok/2);
+  
+  c.fillStyle=kolor;
+  c.fillRect(-bok/2,-bok/2,bok,bok);
+  c.restore();
+} 
+
+function animacja() {
+  c.clearRect(0, 0, w, h);
+  c.strokeRect(0, 0, w, h);
+
+  x = x + vx;
+  y = y + vy;
+  kat = kat + vk;
+  
+  if (x > w || x -bok < 0){vx=-vx; vk=-vk;}
+  if (y > h || y -bok < 0){vy=-vy; vk=-vk;}
+ 
+  
+  kwaO(x,y,bok,kat,'red');
+  
+  clearTimeout(czas);
+  czas = setTimeout(animacja, skok); 
+}
+
+animacja();
+  
+</script>
+</body>
+</html>
